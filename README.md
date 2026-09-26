@@ -31,7 +31,7 @@ npm run dev                  # http://localhost:3000
 
 See `.env.example`. All are optional.
 
-- `NEXT_PUBLIC_SITE_URL`: canonical base URL used for metadata, sitemap and robots. Defaults to `http://localhost:3000`.
+- `NEXT_PUBLIC_SITE_URL`: canonical base URL used for metadata, sitemap and robots. Falls back to Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, then `http://localhost:3000`.
 - `REPORT_WEBHOOK_URL`: secret, server-only webhook that receives question error reports (Slack- and Discord-compatible JSON). When unset, reports are logged on the server.
 - `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots. No ads render when unset.
 
@@ -73,4 +73,4 @@ Add entries to the relevant file in `content/questions/` using `defineQuestions`
 
 ## Deployment
 
-Any Next.js-compatible host works (for example Vercel, or `npm run build && npm start` on a Node server). Set `NEXT_PUBLIC_SITE_URL` to the production domain.
+Any Next.js-compatible host works (for example Vercel, or `npm run build && npm start` on a Node server). Production: https://prepghana.cobbold.dev on Vercel. Pushes to `main` deploy automatically. Set `NEXT_PUBLIC_SITE_URL` to the production domain.
