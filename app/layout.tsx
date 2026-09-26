@@ -1,9 +1,7 @@
 import type { Metadata, Viewport } from "next";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import Script from "next/script";
+import { ConsentManager } from "@/components/consent/consent-manager";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { GA_ID } from "@/lib/analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -33,6 +31,7 @@ export const viewport: Viewport = {
   ],
 };
 
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
 const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
@@ -50,15 +49,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <SiteFooter />
-        {adsenseClient && (
-          <Script
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
-          />
-        )}
+        <ConsentManager gaId={gaId} adsenseClient={adsenseClient} />
       </body>
-      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }

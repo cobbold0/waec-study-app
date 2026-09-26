@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { useConsent } from "@/lib/storage/stores";
 
 const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 const slot = process.env.NEXT_PUBLIC_ADSENSE_SLOT;
@@ -12,18 +13,20 @@ declare global {
 }
 
 /**
- * Clearly labelled display ad. Renders nothing until AdSense is configured.
+ * Clearly labelled display ad. Renders nothing until AdSense is configured and cookies are accepted.
  * Never place inside the active question/answer interface.
  */
 export function AdSlot({ className = "" }: { className?: string }) {
+  const consent = useConsent();
+  const enabled = Boolean(client && slot) && consent === "granted";
   useEffect(() => {
-    if (!client || !slot) return;
+    if (!enabled) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
     } catch {}
-  }, []);
+  }, [enabled]);
 
-  if (!client || !slot) return null;
+  if (!enabled) return null;
 
   return (
     <aside aria-label="Advertisement" className={`my-8 border-y border-border py-3 ${className}`}>

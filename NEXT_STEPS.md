@@ -7,9 +7,9 @@
 - Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions and the "official WAEC Ghana website" references in guides.
 - Set up where question error reports go: create a Slack or Discord incoming webhook (or any endpoint that accepts JSON POST), set it as `REPORT_WEBHOOK_URL` in the hosting environment, send one test report, and assign someone to review reports. Until then, reports are only written to server logs.
 - Official past questions: decide whether to seek a licence from WAEC (or a licensed publisher). Free APIs such as ALOC exist but give no evidence of WAEC permission, so none are integrated.
-- Google Analytics: confirm visits appear in GA → Reports → Realtime; optionally mark `practice_completed` as a key event. Consider a cookie consent banner as part of the legal/privacy review.
+- Google Analytics: confirm visits appear in GA → Reports → Realtime (accept cookies in the banner first); optionally mark `practice_completed` as a key event. Expect lower GA numbers than real traffic, since visitors who decline are not counted.
 - Apply for Google AdSense when there is enough traffic and content, then set `NEXT_PUBLIC_ADSENSE_CLIENT` and `NEXT_PUBLIC_ADSENSE_SLOT`.
-- Review legal and privacy requirements (for example Ghana's Data Protection Act and ad-provider cookie consent) before launch and before enabling ads. Update `/privacy` as needed.
+- Review legal and privacy requirements (for example Ghana's Data Protection Act) before launch and before enabling ads, including whether the consent banner wording and behaviour are sufficient. Update `/privacy` as needed.
 
 ## Optional improvements
 
@@ -46,4 +46,5 @@
 - GitHub default branch and Vercel production branch set to `main`; pushes to `main` deploy to production (verified)
 - Google Search Console property created and sitemap submitted (by owner)
 - Google Analytics 4 live in production (tag verified on the live site) with `study_started`, `question_answered` and `practice_completed` events
+- Cookie consent banner: Google Analytics and AdSense load only after "Accept"; Decline has equal prominence; banner hidden during practice; choice can be changed on `/privacy`
 - Light and dark themes; mobile layout checked on Pixel 7 with no horizontal overflow

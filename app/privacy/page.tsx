@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { CookieSettings } from "@/components/consent/cookie-settings";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,7 +22,7 @@ export default function PrivacyPage() {
       </p>
       <h2 className="pt-2 text-xl font-bold">Analytics</h2>
       <p>
-        We use Google Analytics to understand how the site is used, for example which pages are visited,
+        If you accept cookies, we use Google Analytics to understand how the site is used, for example which pages are visited,
         how many practice sessions are started and completed, and overall accuracy. Google Analytics uses
         cookies and collects standard technical information such as device type, browser and approximate
         location. We do not send your answers, question text or any personal details to Google Analytics.
@@ -31,6 +32,12 @@ export default function PrivacyPage() {
         The site may show advertising to keep it free. Ad providers may use cookies or similar technologies
         to show and measure ads. Ads are always labelled and never placed inside the question-answering area.
       </p>
+      <h2 id="cookies" className="pt-2 text-xl font-bold">Cookies and your choice</h2>
+      <p>
+        Analytics and advertising scripts load only if you accept cookies in the banner. If you decline, the
+        site works exactly the same and nothing is sent to Google. Your choice is saved on this device.
+      </p>
+      <CookieSettings />
       <h2 className="pt-2 text-xl font-bold">Changes</h2>
       <p>If we add features such as accounts, we will update this page before they go live.</p>
     </article>

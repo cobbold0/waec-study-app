@@ -22,6 +22,12 @@ export const saveActiveSession = (session: PracticeSession) =>
   writeItem(STORAGE_KEYS.session, JSON.stringify(session));
 export const clearActiveSession = () => removeItem(STORAGE_KEYS.session);
 
+export type Consent = "granted" | "denied";
+const parseConsent = (raw: string | null): Consent | null => (raw === "granted" || raw === "denied" ? raw : null);
+export const loadConsent = () => parseConsent(readItem(STORAGE_KEYS.consent));
+export const saveConsent = (consent: Consent) => writeItem(STORAGE_KEYS.consent, consent);
+export const clearConsent = () => removeItem(STORAGE_KEYS.consent);
+
 // Snapshots must be referentially stable between renders, so cache by raw string.
 function cachedReader<T>(key: string, parse: (raw: string | null) => T) {
   let lastRaw: string | null | undefined;
@@ -38,6 +44,7 @@ function cachedReader<T>(key: string, parse: (raw: string | null) => T) {
 
 const getProgressSnapshot = cachedReader(STORAGE_KEYS.progress, parseProgress);
 const getSessionSnapshot = cachedReader(STORAGE_KEYS.session, parseSession);
+const getConsentSnapshot = cachedReader(STORAGE_KEYS.consent, parseConsent);
 const getServerSnapshot = () => undefined;
 
 /** Stored progress, or `undefined` during server render / before hydration. */
@@ -48,4 +55,9 @@ export function useProgress(): Progress | undefined {
 /** Active session (null if none), or `undefined` before hydration. */
 export function useActiveSession(): PracticeSession | null | undefined {
   return useSyncExternalStore(subscribeStorage, getSessionSnapshot, getServerSnapshot);
+}
+
+/** Cookie consent choice (null if not chosen yet), or `undefined` before hydration. */
+export function useConsent(): Consent | null | undefined {
+  return useSyncExternalStore(subscribeStorage, getConsentSnapshot, getServerSnapshot);
 }

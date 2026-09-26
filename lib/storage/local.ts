@@ -3,6 +3,7 @@
 export const STORAGE_KEYS = {
   progress: "waec-study:progress:v1",
   session: "waec-study:session:v1",
+  consent: "waec-study:consent:v1",
 } as const;
 
 const CHANGE_EVENT = "waec-study:storage";

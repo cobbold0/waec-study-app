@@ -67,6 +67,7 @@ e2e/                    Playwright tests
 - **Question selection** prefers unseen questions, then ones previously answered wrongly, then the least recently seen.
 - **Progress** (per-question and per-topic tallies, recent sessions) is stored locally and validated with Zod on load. Corrupt data falls back to empty progress.
 - **Error reports**: students can report a question after answering it, or from the results review. `POST /api/reports` validates the input with Zod, checks that the question exists, applies a best-effort rate limit (5 per minute per client), and forwards the report to `REPORT_WEBHOOK_URL`. No IP address or personal data is stored.
+- **Cookie consent**: `ConsentManager` shows a banner (not on practice pages) and loads Google Analytics / AdSense only after the visitor accepts. The choice is stored in `localStorage` and can be changed on `/privacy`. Analytics events and ad slots are also gated on consent.
 - **Timed practice** (`mode=exam`) gives 60 seconds per question, hides feedback until the end, then reviews every answer.
 
 ## Adding questions
