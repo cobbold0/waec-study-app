@@ -3,7 +3,6 @@
 ## Owner must do
 
 - Google Search Console: check the Sitemaps report shows "Success" with 13 discovered URLs, then watch Pages/Indexing over the next few weeks.
-- Set the GitHub default branch to `main` (repo Settings → General).
 - Have a qualified teacher review all practice questions, explanations and study guides before public launch (`content/`).
 - Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions and the "official WAEC Ghana website" references in guides.
 - Set up where question error reports go: create a Slack or Discord incoming webhook (or any endpoint that accepts JSON POST), set it as `REPORT_WEBHOOK_URL` in the hosting environment, send one test report, and assign someone to review reports. Until then, reports are only written to server logs.
@@ -44,6 +43,6 @@
 - Question error reporting: "Report a problem" after each answered question and on the results review, a validated `/api/reports` endpoint with rate limiting, delivery to a configurable webhook, and no personal data collected
 - Labelled ad slots (off until configured) on home, subject pages, guides and results only, never in the question interface
 - Deployed on Vercel at https://prepghana.cobbold.dev (domain verified in Vercel; `www` redirects to it); live robots.txt and sitemap.xml verified to use the production domain
-- Vercel production branch set to `main`; pushes to `main` deploy to production (verified)
+- GitHub default branch and Vercel production branch set to `main`; pushes to `main` deploy to production (verified)
 - Google Search Console property created and sitemap submitted (by owner)
 - Light and dark themes; mobile layout checked on Pixel 7 with no horizontal overflow
