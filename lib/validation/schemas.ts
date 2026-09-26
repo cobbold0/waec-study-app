@@ -106,3 +106,13 @@ export type SessionSummary = z.infer<typeof sessionSummarySchema>;
 export type Tally = z.infer<typeof tallySchema>;
 export type Progress = z.infer<typeof progressSchema>;
 export type QuestionStats = Progress["questionStats"];
+
+export const reportReasonSchema = z.enum(["wrong_answer", "typo", "unclear_explanation", "other"]);
+
+export const questionReportSchema = z.object({
+  questionId: z.string().min(1).max(100),
+  reason: reportReasonSchema,
+  details: z.string().trim().max(500).default(""),
+});
+
+export type ReportReason = z.infer<typeof reportReasonSchema>;

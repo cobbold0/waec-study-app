@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdSlot } from "@/components/ads/ad-slot";
+import { ReportQuestion } from "@/components/questions/report-question";
 import { buttonClass } from "@/components/ui/button";
 import { calculateAccuracy, isCorrectAnswer } from "@/lib/questions/engine";
 import type { Question, SessionSummary } from "@/lib/validation/schemas";
@@ -86,6 +87,7 @@ export function SessionResults({ summary, questions, answers, topicNames, subjec
                     <p className="text-sm text-success">✓ Correct answer: {q.options[q.correctOption]}</p>
                   )}
                   <p className="mt-2 text-sm text-muted">{q.explanation}</p>
+                  <ReportQuestion questionId={q.id} />
                 </li>
               );
             })}

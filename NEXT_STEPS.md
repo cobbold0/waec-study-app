@@ -2,12 +2,12 @@
 
 ## Owner must do
 
-- Confirm the product name. "Prep Ghana" is a placeholder set in `lib/site.ts`. Avoid names that imply WAEC affiliation.
 - Register a production domain and set `NEXT_PUBLIC_SITE_URL` in the hosting environment.
 - Create a hosting account (for example Vercel) and connect the repository.
 - Have a qualified teacher review all practice questions, explanations and study guides before public launch (`content/`).
-- Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions, the "official WAEC Ghana website" references in guides, and the claim on `/about` that questions are reviewed and corrected regularly.
-- Decide how students should report mistakes (for example a contact email or form) and add it to `/about`.
+- Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions and the "official WAEC Ghana website" references in guides.
+- Set up where question error reports go: create a Slack or Discord incoming webhook (or any endpoint that accepts JSON POST), set it as `REPORT_WEBHOOK_URL` in the hosting environment, send one test report, and assign someone to review reports. Until then, reports are only written to server logs.
+- Official past questions: decide whether to seek a licence from WAEC (or a licensed publisher). Free APIs such as ALOC exist but give no evidence of WAEC permission, so none are integrated.
 - Configure analytics if desired.
 - Apply for Google AdSense when there is enough traffic and content, then set `NEXT_PUBLIC_ADSENSE_CLIENT` and `NEXT_PUBLIC_ADSENSE_SLOT`.
 - Review legal and privacy requirements (for example Ghana's Data Protection Act and ad-provider cookie consent) before launch and before enabling ads. Update `/privacy` as needed.
@@ -41,5 +41,6 @@
 - Progress dashboard: continue studying, overall stats, subject progress, strong and weak topics, recent sessions, reset
 - Public SEO pages: home, subjects, 4 subject pages, 5 study guides, about, privacy. Each has a unique title, description, canonical URL and Open Graph image; subject and guide pages also have breadcrumb structured data
 - Sitemap and robots.txt; practice and dashboard pages are noindex
+- Question error reporting: "Report a problem" after each answered question and on the results review, a validated `/api/reports` endpoint with rate limiting, delivery to a configurable webhook, and no personal data collected
 - Labelled ad slots (off until configured) on home, subject pages, guides and results only, never in the question interface
 - Light and dark themes; mobile layout checked on Pixel 7 with no horizontal overflow

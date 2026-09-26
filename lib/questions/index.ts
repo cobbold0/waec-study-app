@@ -15,3 +15,7 @@ export function countQuestionsByTopic(subjectId: string): Record<string, number>
   for (const q of getQuestions({ subjectId })) counts[q.topicId] = (counts[q.topicId] ?? 0) + 1;
   return counts;
 }
+
+export function getQuestionById(id: string): Question | undefined {
+  return questions.find((q) => q.published && q.id === id);
+}

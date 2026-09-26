@@ -32,6 +32,7 @@ npm run dev                  # http://localhost:3000
 See `.env.example`. All are optional.
 
 - `NEXT_PUBLIC_SITE_URL`: canonical base URL used for metadata, sitemap and robots. Defaults to `http://localhost:3000`.
+- `REPORT_WEBHOOK_URL`: secret, server-only webhook that receives question error reports (Slack- and Discord-compatible JSON). When unset, reports are logged on the server.
 - `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots. No ads render when unset.
 
 ## Project structure
@@ -43,6 +44,7 @@ app/                    Routes
   practice/[subject]/   Practice session (?mode=topic|mixed|quick|exam&topic=slug), noindex
   dashboard/            Local progress dashboard, noindex
   [guide]/              SEO study guides (/waec-study, /waec-study-tips, …)
+  api/reports/          Question error report endpoint
   about/, privacy/      Content policy and privacy
   sitemap.ts, robots.ts, opengraph-image.tsx
 components/             UI (layout, subjects, questions, study, progress, ads)
@@ -62,6 +64,7 @@ e2e/                    Playwright tests
 - **Practice pages** render on the server and send only the selected subject or topic's questions to the browser. The session runs on the client, is saved in `localStorage`, and resumes after a reload.
 - **Question selection** prefers unseen questions, then ones previously answered wrongly, then the least recently seen.
 - **Progress** (per-question and per-topic tallies, recent sessions) is stored locally and validated with Zod on load. Corrupt data falls back to empty progress.
+- **Error reports**: students can report a question after answering it, or from the results review. `POST /api/reports` validates the input with Zod, checks that the question exists, applies a best-effort rate limit (5 per minute per client), and forwards the report to `REPORT_WEBHOOK_URL`. No IP address or personal data is stored.
 - **Timed practice** (`mode=exam`) gives 60 seconds per question, hides feedback until the end, then reviews every answer.
 
 ## Adding questions

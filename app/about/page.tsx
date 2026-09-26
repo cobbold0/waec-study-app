@@ -35,8 +35,9 @@ export default function AboutPage() {
       </p>
       <h2 className="pt-2 text-xl font-bold">Found a mistake?</h2>
       <p>
-        We work hard to make every answer and explanation accurate. If you think something is wrong, please
-        let your teacher know and double-check with your textbook. We review and correct questions regularly.
+        We work hard to make every answer and explanation accurate. If you think something is wrong, use the
+        &quot;Report a problem with this question&quot; link shown after you answer, or on your results
+        screen. Reports are reviewed and questions are corrected where needed.
       </p>
       <p>
         <Link href="/subjects" className="text-primary hover:underline">Start practising →</Link>

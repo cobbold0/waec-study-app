@@ -13,6 +13,12 @@ test("student can go from home to practice, answer, and see progress", async ({ 
   await page.getByRole("button", { name: "Check answer" }).click();
   await expect(page.getByRole("heading", { name: /Correct!|Not quite/ })).toBeVisible();
 
+  // Report a problem with the question (no webhook configured: accepted and logged server-side).
+  await page.getByRole("button", { name: "Report a problem with this question" }).click();
+  await page.getByRole("radio", { name: "Typo or confusing wording" }).check();
+  await page.getByRole("button", { name: "Send report" }).click();
+  await expect(page.getByText("Thanks for the report")).toBeVisible();
+
   // Progress survives a reload and the session resumes.
   await page.reload();
   await expect(page.getByRole("heading", { name: /Correct!|Not quite/ })).toBeVisible();

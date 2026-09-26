@@ -2,6 +2,7 @@
 
 import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { QuestionCard } from "@/components/questions/question-card";
+import { ReportQuestion } from "@/components/questions/report-question";
 import { buttonClass } from "@/components/ui/button";
 import { isCorrectAnswer, selectQuestions } from "@/lib/questions/engine";
 import { PRACTICE_MODES } from "@/lib/practice/modes";
@@ -198,6 +199,7 @@ export function PracticeClient(props: PracticeClientProps) {
               </p>
             )}
             <p className="mt-2">{question.explanation}</p>
+            <ReportQuestion key={question.id} questionId={question.id} />
           </section>
         )}
       </div>
