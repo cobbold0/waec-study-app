@@ -33,6 +33,7 @@ See `.env.example`. All are optional.
 
 - `NEXT_PUBLIC_SITE_URL`: canonical base URL used for metadata, sitemap and robots. Falls back to Vercel's `VERCEL_PROJECT_PRODUCTION_URL`, then `http://localhost:3000`.
 - `REPORT_WEBHOOK_URL`: secret, server-only webhook that receives question error reports (Slack- and Discord-compatible JSON). When unset, reports are logged on the server.
+- `GOOGLE_SITE_VERIFICATION`: Search Console HTML-tag verification code; adds the `google-site-verification` meta tag when set.
 - `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots. No ads render when unset.
 
 ## Project structure

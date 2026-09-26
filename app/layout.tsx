@@ -19,6 +19,9 @@ export const metadata: Metadata = {
     locale: "en_GH",
   },
   twitter: { card: "summary_large_image" },
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 };
 
 export const viewport: Viewport = {

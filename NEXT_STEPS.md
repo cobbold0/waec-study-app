@@ -2,7 +2,7 @@
 
 ## Owner must do
 
-- Confirm the live site uses the production domain in links: open https://prepghana.cobbold.dev/robots.txt and check the Sitemap line shows `https://prepghana.cobbold.dev/sitemap.xml`, not `localhost`. (`NEXT_PUBLIC_SITE_URL` is set and a code fallback was added, but the live result has not been verified.)
+- Google Search Console: finish verifying the property (DNS TXT record for a Domain property, or set `GOOGLE_SITE_VERIFICATION` in Vercel and redeploy for the HTML-tag method), then submit `https://prepghana.cobbold.dev/sitemap.xml` under Sitemaps.
 - Set the GitHub default branch to `main` (repo Settings → General), and confirm Vercel's production branch is `main` (Vercel project → Settings → Git).
 - Have a qualified teacher review all practice questions, explanations and study guides before public launch (`content/`).
 - Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions and the "official WAEC Ghana website" references in guides.
@@ -43,5 +43,5 @@
 - Sitemap and robots.txt; practice and dashboard pages are noindex
 - Question error reporting: "Report a problem" after each answered question and on the results review, a validated `/api/reports` endpoint with rate limiting, delivery to a configurable webhook, and no personal data collected
 - Labelled ad slots (off until configured) on home, subject pages, guides and results only, never in the question interface
-- Deployed on Vercel at https://prepghana.cobbold.dev (domain verified in Vercel; `www` redirects to it)
+- Deployed on Vercel at https://prepghana.cobbold.dev (domain verified in Vercel; `www` redirects to it); live robots.txt and sitemap.xml verified to use the production domain
 - Light and dark themes; mobile layout checked on Pixel 7 with no horizontal overflow
