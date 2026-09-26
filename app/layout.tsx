@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import Script from "next/script";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { GA_ID } from "@/lib/analytics";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -56,6 +58,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           />
         )}
       </body>
+      {GA_ID && <GoogleAnalytics gaId={GA_ID} />}
     </html>
   );
 }

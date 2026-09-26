@@ -4,6 +4,7 @@ import { useEffect, useEffectEvent, useMemo, useRef, useState } from "react";
 import { QuestionCard } from "@/components/questions/question-card";
 import { ReportQuestion } from "@/components/questions/report-question";
 import { buttonClass } from "@/components/ui/button";
+import { track } from "@/lib/analytics";
 import { isCorrectAnswer, selectQuestions } from "@/lib/questions/engine";
 import { PRACTICE_MODES } from "@/lib/practice/modes";
 import {
@@ -73,6 +74,12 @@ export function PracticeClient(props: PracticeClientProps) {
 
   useEffect(() => saveActiveSession(session), [session]);
 
+  const eventParams = { subject: props.subject.id, topic: props.topic?.id ?? "all", mode };
+  const onSessionStart = useEffectEvent(() => {
+    if (session.answers.every((a) => a === null)) track("study_started", eventParams);
+  });
+  useEffect(() => onSessionStart(), [session.id]);
+
   function finish() {
     const completed = completeSession(session, Date.now());
     let progress = loadProgress();
@@ -82,7 +89,9 @@ export function PracticeClient(props: PracticeClientProps) {
         if (a !== null && a !== undefined) progress = recordAnswer(progress, q, isCorrectAnswer(q, a), Date.now());
       });
     }
-    saveProgress(recordSession(progress, summarizeSession(completed, questions)));
+    const summary = summarizeSession(completed, questions);
+    saveProgress(recordSession(progress, summary));
+    track("practice_completed", { ...eventParams, questions: summary.total, accuracy: summary.accuracy });
     setSession(completed);
   }
 
@@ -131,7 +140,9 @@ export function PracticeClient(props: PracticeClientProps) {
     e.preventDefault();
     if (!config.instantFeedback || revealed) return;
     if (selected === null) return;
-    saveProgress(recordAnswer(loadProgress(), question, isCorrectAnswer(question, selected), Date.now()));
+    const correct = isCorrectAnswer(question, selected);
+    saveProgress(recordAnswer(loadProgress(), question, correct, Date.now()));
+    track("question_answered", { ...eventParams, correct });
     setSession((s) => answerCurrent(s, selected));
   }
 

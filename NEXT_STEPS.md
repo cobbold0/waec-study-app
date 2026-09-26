@@ -8,7 +8,7 @@
 - Verify the factual Ghana/WAEC statements in content, for example the Social Studies governance questions and the "official WAEC Ghana website" references in guides.
 - Set up where question error reports go: create a Slack or Discord incoming webhook (or any endpoint that accepts JSON POST), set it as `REPORT_WEBHOOK_URL` in the hosting environment, send one test report, and assign someone to review reports. Until then, reports are only written to server logs.
 - Official past questions: decide whether to seek a licence from WAEC (or a licensed publisher). Free APIs such as ALOC exist but give no evidence of WAEC permission, so none are integrated.
-- Configure analytics if desired.
+- Google Analytics: create a GA4 property and web data stream for https://prepghana.cobbold.dev, add the measurement ID (G-…) in Vercel as `NEXT_PUBLIC_GA_ID` (Production), then redeploy. Optionally mark `practice_completed` as a key event in GA. Consider a cookie consent banner as part of the legal/privacy review.
 - Apply for Google AdSense when there is enough traffic and content, then set `NEXT_PUBLIC_ADSENSE_CLIENT` and `NEXT_PUBLIC_ADSENSE_SLOT`.
 - Review legal and privacy requirements (for example Ghana's Data Protection Act and ad-provider cookie consent) before launch and before enabling ads. Update `/privacy` as needed.
 

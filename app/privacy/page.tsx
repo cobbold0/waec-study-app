@@ -19,6 +19,13 @@ export default function PrivacyPage() {
         They are not sent to our servers. Clearing your browser data, or using &quot;Reset progress&quot; on
         the progress page, deletes them.
       </p>
+      <h2 className="pt-2 text-xl font-bold">Analytics</h2>
+      <p>
+        We use Google Analytics to understand how the site is used, for example which pages are visited,
+        how many practice sessions are started and completed, and overall accuracy. Google Analytics uses
+        cookies and collects standard technical information such as device type, browser and approximate
+        location. We do not send your answers, question text or any personal details to Google Analytics.
+      </p>
       <h2 className="pt-2 text-xl font-bold">Advertising</h2>
       <p>
         The site may show advertising to keep it free. Ad providers may use cookies or similar technologies
