@@ -35,7 +35,7 @@ See `.env.example`. All are optional.
 - `REPORT_WEBHOOK_URL`: secret, server-only webhook that receives question error reports (Slack- and Discord-compatible JSON). When unset, reports are logged on the server.
 - `GOOGLE_SITE_VERIFICATION`: Search Console HTML-tag verification code; adds the `google-site-verification` meta tag when set.
 - `NEXT_PUBLIC_GA_ID`: Google Analytics 4 measurement ID. Loads GA via `@next/third-parties` and sends `study_started`, `question_answered` and `practice_completed` events (subject, topic, mode, correctness/accuracy only). Off when unset.
-- `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots (after cookie consent), the `google-adsense-account` verification meta tag and `/ads.txt`. No ads render when unset.
+- `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots (after cookie consent) and the `google-adsense-account` meta tag. `ads.txt` lives on the root domain (cobbold.dev), which covers this subdomain. No ads render when unset.
 
 ## Project structure
 

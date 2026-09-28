@@ -8,7 +8,7 @@
 - Set up where question error reports go: create a Slack or Discord incoming webhook (or any endpoint that accepts JSON POST), set it as `REPORT_WEBHOOK_URL` in the hosting environment, send one test report, and assign someone to review reports. Until then, reports are only written to server logs.
 - Official past questions: decide whether to seek a licence from WAEC (or a licensed publisher). Free APIs such as ALOC exist but give no evidence of WAEC permission, so none are integrated.
 - Google Analytics: confirm visits appear in GA → Reports → Realtime (accept cookies in the banner first); optionally mark `practice_completed` as a key event. Expect lower GA numbers than real traffic, since visitors who decline are not counted.
-- AdSense: in AdSense → Sites, add `prepghana.cobbold.dev`, verify with the "Meta tag" method (already on the site) and confirm `ads.txt` shows "Authorized". Wait for site approval (can take days to weeks); ads stay blank until then. Ads only show to visitors who accept cookies.
+- AdSense: the site is covered by the `cobbold.dev` AdSense site and its root `ads.txt` (hosted on the portfolio). Wait for AdSense to approve `cobbold.dev`; ads stay blank until then. Decide whether ads should show to visitors who decline or ignore the cookie banner (currently they don't).
 - Review legal and privacy requirements (for example Ghana's Data Protection Act) before launch and before enabling ads, including whether the consent banner wording and behaviour are sufficient. Update `/privacy` as needed.
 
 ## Optional improvements
@@ -47,5 +47,5 @@
 - Google Search Console property created and sitemap submitted (by owner)
 - Google Analytics 4 live in production (tag verified on the live site) with `study_started`, `question_answered` and `practice_completed` events
 - Cookie consent banner: Google Analytics and AdSense load only after "Accept"; Decline has equal prominence; banner hidden during practice; choice can be changed on `/privacy`
-- AdSense publisher ID and ad slot configured in production; `google-adsense-account` meta tag and `/ads.txt` served for site verification
+- AdSense publisher ID and ad slot configured in production; `google-adsense-account` meta tag on every page
 - Light and dark themes; mobile layout checked on Pixel 7 with no horizontal overflow
