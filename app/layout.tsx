@@ -22,6 +22,10 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
+  // Lets AdSense verify site ownership even though the ad script waits for cookie consent.
+  other: process.env.NEXT_PUBLIC_ADSENSE_CLIENT
+    ? { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT }
+    : undefined,
 };
 
 export const viewport: Viewport = {
