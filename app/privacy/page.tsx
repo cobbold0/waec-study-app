@@ -29,13 +29,16 @@ export default function PrivacyPage() {
       </p>
       <h2 className="pt-2 text-xl font-bold">Advertising</h2>
       <p>
-        The site may show advertising to keep it free. Ad providers may use cookies or similar technologies
-        to show and measure ads. Ads are always labelled and never placed inside the question-answering area.
+        The site shows advertising from Google AdSense to keep it free. If you accept cookies, ads may be
+        personalised to your interests. If you decline or do not choose, you still see ads, but they are
+        non-personalised: Google does not use your browsing history to choose them, though it may still use
+        cookies for limited purposes such as frequency capping and fraud prevention. Ads are always labelled
+        and never placed inside the question-answering area.
       </p>
       <h2 id="cookies" className="pt-2 text-xl font-bold">Cookies and your choice</h2>
       <p>
-        Analytics and advertising scripts load only if you accept cookies in the banner. If you decline, the
-        site works exactly the same and nothing is sent to Google. Your choice is saved on this device.
+        Google Analytics loads only if you accept cookies in the banner, and ads are only personalised if you
+        accept. If you decline, the site works exactly the same. Your choice is saved on this device.
       </p>
       <CookieSettings />
       <h2 className="pt-2 text-xl font-bold">Changes</h2>

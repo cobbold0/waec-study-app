@@ -7,6 +7,7 @@ import { ConsentManager } from "./consent-manager";
 
 let pathname = "/";
 vi.mock("next/navigation", () => ({ usePathname: () => pathname }));
+vi.mock("next/script", () => ({ default: ({ src }: { src: string }) => <div data-testid="adsense">{src}</div> }));
 vi.mock("@next/third-parties/google", () => ({
   GoogleAnalytics: ({ gaId }: { gaId: string }) => <div data-testid="ga">{gaId}</div>,
 }));
@@ -39,6 +40,12 @@ describe("ConsentManager", () => {
     pathname = "/practice/mathematics";
     render(<ConsentManager gaId="G-TEST" />);
     expect(screen.queryByRole("region", { name: "Cookie consent" })).not.toBeInTheDocument();
+  });
+
+  it("loads AdSense for everyone, even before a choice is made", () => {
+    render(<ConsentManager gaId="G-TEST" adsenseClient="ca-pub-123" />);
+    expect(screen.getByTestId("adsense")).toHaveTextContent("client=ca-pub-123");
+    expect(screen.queryByTestId("ga")).not.toBeInTheDocument();
   });
 
   it("renders nothing when analytics and ads are not configured", () => {

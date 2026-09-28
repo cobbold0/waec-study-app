@@ -35,7 +35,7 @@ See `.env.example`. All are optional.
 - `REPORT_WEBHOOK_URL`: secret, server-only webhook that receives question error reports (Slack- and Discord-compatible JSON). When unset, reports are logged on the server.
 - `GOOGLE_SITE_VERIFICATION`: Search Console HTML-tag verification code; adds the `google-site-verification` meta tag when set.
 - `NEXT_PUBLIC_GA_ID`: Google Analytics 4 measurement ID. Loads GA via `@next/third-parties` and sends `study_started`, `question_answered` and `practice_completed` events (subject, topic, mode, correctness/accuracy only). Off when unset.
-- `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots (after cookie consent) and the `google-adsense-account` meta tag. `ads.txt` lives on the root domain (cobbold.dev), which covers this subdomain. No ads render when unset.
+- `NEXT_PUBLIC_ADSENSE_CLIENT`, `NEXT_PUBLIC_ADSENSE_SLOT`: enable labelled AdSense slots (non-personalised without cookie consent) and the `google-adsense-account` meta tag. `ads.txt` lives on the root domain (cobbold.dev), which covers this subdomain. No ads render when unset.
 
 ## Project structure
 
@@ -67,7 +67,7 @@ e2e/                    Playwright tests
 - **Question selection** prefers unseen questions, then ones previously answered wrongly, then the least recently seen.
 - **Progress** (per-question and per-topic tallies, recent sessions) is stored locally and validated with Zod on load. Corrupt data falls back to empty progress.
 - **Error reports**: students can report a question after answering it, or from the results review. `POST /api/reports` validates the input with Zod, checks that the question exists, applies a best-effort rate limit (5 per minute per client), and forwards the report to `REPORT_WEBHOOK_URL`. No IP address or personal data is stored.
-- **Cookie consent**: `ConsentManager` shows a banner (not on practice pages) and loads Google Analytics / AdSense only after the visitor accepts. The choice is stored in `localStorage` and can be changed on `/privacy`. Analytics events and ad slots are also gated on consent.
+- **Cookie consent**: `ConsentManager` shows a banner (not on practice pages). Google Analytics loads only after the visitor accepts. AdSense loads for everyone; `AdSlot` requests non-personalised ads (`requestNonPersonalizedAds = 1`) unless the visitor accepted. The choice is stored in `localStorage` and can be changed on `/privacy`.
 - **Timed practice** (`mode=exam`) gives 60 seconds per question, hides feedback until the end, then reviews every answer.
 
 ## Adding questions
