@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useConsent } from "@/lib/storage/stores";
 
 const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5952797612434262";
@@ -26,6 +26,8 @@ interface AdSlotProps {
  * - "banner": leaderboard (top/bottom)
  * - "sidebar": vertical skyscraper for left and right rails
  * - "inline": in-feed rectangle between topics or question reviews
+ *
+ * Unfilled ads collapse cleanly without leaving broken placeholder texts.
  */
 export function AdSlot({
   variant = "inline",
@@ -38,6 +40,7 @@ export function AdSlot({
   const activeClient = client || "ca-pub-5952797612434262";
   const activeSlot = slot || defaultSlot;
   const isConfigured = Boolean(activeClient && activeSlot);
+  const [isUnfilled, setIsUnfilled] = useState(false);
 
   useEffect(() => {
     if (!isConfigured || !ref.current || ref.current.dataset.adsbygoogleStatus) return;
@@ -48,6 +51,16 @@ export function AdSlot({
     } catch {
       // ignore
     }
+
+    const ins = ref.current;
+    if (!ins) return;
+    const observer = new MutationObserver(() => {
+      if (ins.getAttribute("data-ad-status") === "unfilled") {
+        setIsUnfilled(true);
+      }
+    });
+    observer.observe(ins, { attributes: true, attributeFilter: ["data-ad-status"] });
+    return () => observer.disconnect();
   }, [isConfigured, consent]);
 
   const variantStyles = {
@@ -56,25 +69,30 @@ export function AdSlot({
     inline: "w-full my-8 min-h-[250px] text-center",
   };
 
-  if (isConfigured) {
-    return (
-      <aside aria-label={label} className={`print:hidden overflow-hidden ${variantStyles[variant]} ${className}`}>
-        <p className="mb-1 text-center text-[10px] font-semibold tracking-wider text-muted uppercase">{label}</p>
-        <ins
-          ref={ref}
-          className="adsbygoogle block"
-          style={{
-            display: "block",
-            minHeight: variant === "sidebar" ? 600 : variant === "banner" ? 90 : 250,
-          }}
-          data-ad-client={activeClient}
-          data-ad-slot={activeSlot}
-          data-ad-format={variant === "sidebar" ? "vertical" : "auto"}
-          data-full-width-responsive={variant !== "sidebar" ? "true" : "false"}
-        />
-      </aside>
-    );
+  if (!isConfigured || isUnfilled) {
+    return null;
   }
 
-  return null;
+  return (
+    <aside
+      aria-label={label}
+      className={`print:hidden overflow-hidden transition-all duration-300 ${variantStyles[variant]} ${className}`}
+    >
+      <p className="mb-1 text-center text-[9px] font-medium tracking-wider text-muted-foreground/60 uppercase select-none">
+        {label}
+      </p>
+      <ins
+        ref={ref}
+        className="adsbygoogle block"
+        style={{
+          display: "block",
+          minHeight: variant === "sidebar" ? 600 : variant === "banner" ? 90 : 250,
+        }}
+        data-ad-client={activeClient}
+        data-ad-slot={activeSlot}
+        data-ad-format={variant === "sidebar" ? "vertical" : "auto"}
+        data-full-width-responsive={variant !== "sidebar" ? "true" : "false"}
+      />
+    </aside>
+  );
 }

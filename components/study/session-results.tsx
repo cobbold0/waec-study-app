@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { AdSlot } from "@/components/ads/ad-slot";
+import { DownloadRevisionButton } from "@/components/practice/DownloadRevisionButton";
 import { ReportQuestion } from "@/components/questions/report-question";
 import { buttonClass } from "@/components/ui/button";
 import { calculateAccuracy, isCorrectAnswer } from "@/lib/questions/engine";
@@ -50,6 +51,9 @@ export function SessionResults({ summary, questions, answers, topicNames, subjec
           <Link href="/dashboard" className={buttonClass("ghost")}>
             View progress
           </Link>
+        </div>
+        <div className="mt-4">
+          <DownloadRevisionButton subjectTitle={subjectSlug} />
         </div>
       </section>
 

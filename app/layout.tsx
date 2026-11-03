@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { AdRailsLayout } from "@/components/ads/AdRailsLayout";
 import { ConsentManager } from "@/components/consent/consent-manager";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
+import { MONETIZATION } from "@/lib/monetization";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -66,6 +68,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <SiteFooter />
         <ConsentManager gaId={gaId} adsenseClient={adsenseClient} />
+        <Script
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClient}`}
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
+        {MONETIZATION.astraPopunderUrl && (
+          <Script
+            src={MONETIZATION.astraPopunderUrl}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );
