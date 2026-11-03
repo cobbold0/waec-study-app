@@ -22,6 +22,7 @@ export function SiteFooter() {
           <h2 className="mb-2 font-semibold text-foreground">{site.name}</h2>
           <ul className="space-y-1.5">
             <li><Link href="/subjects" className="hover:text-primary hover:underline">All subjects</Link></li>
+            <li><Link href="/sitemap-directory" className="hover:text-primary hover:underline">Sitemap directory</Link></li>
             <li><Link href="/about" className="hover:text-primary hover:underline">About our questions</Link></li>
             <li><Link href="/privacy" className="hover:text-primary hover:underline">Privacy</Link></li>
           </ul>

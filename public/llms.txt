@@ -1,0 +1,10 @@
+# Prep Ghana
+
+> Free WAEC and WASSCE examination practice platform for Ghanaian secondary school students.
+
+## Core Pages & Revision Modules
+- [Prep Ghana Homepage](https://prepghana.cobbold.dev/): Mobile-friendly practice platform covering Core Mathematics, English Language, Integrated Science, and Social Studies.
+- [Subjects Directory](https://prepghana.cobbold.dev/subjects): Subject selection with topic-by-topic quizzes and instant step-by-step explanations.
+- [WAEC Mathematics Preparation Guide](https://prepghana.cobbold.dev/waec-mathematics): Core Mathematics formulas, exam tips, and problem-solving strategies.
+- [WAEC English Language Preparation Guide](https://prepghana.cobbold.dev/waec-english): Guide to concord, idioms, vocabulary, summary writing, and essay composition.
+- [WAEC Study Tips](https://prepghana.cobbold.dev/waec-study-tips): Evidence-based revision strategies for West African Senior School Certificate Examinations.
