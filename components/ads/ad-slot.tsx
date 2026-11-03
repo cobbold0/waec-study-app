@@ -3,8 +3,8 @@
 import { useEffect, useRef } from "react";
 import { useConsent } from "@/lib/storage/stores";
 
-const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-const defaultSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT;
+const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5952797612434262";
+const defaultSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "1273092714";
 const showPlaceholders = process.env.NEXT_PUBLIC_AD_PLACEHOLDERS === "true" || process.env.NODE_ENV === "development";
 
 declare global {
@@ -36,7 +36,9 @@ export function AdSlot({
 }: AdSlotProps) {
   const consent = useConsent();
   const ref = useRef<HTMLModElement>(null);
-  const enabled = Boolean(client && slot) && consent !== undefined;
+  const activeClient = client || "ca-pub-5952797612434262";
+  const activeSlot = slot || defaultSlot;
+  const enabled = Boolean(activeClient && activeSlot) && consent !== undefined;
 
   useEffect(() => {
     if (!enabled || !ref.current || ref.current.dataset.adsbygoogleStatus) return;
@@ -66,8 +68,8 @@ export function AdSlot({
             display: "block",
             minHeight: variant === "sidebar" ? 600 : variant === "banner" ? 90 : 250,
           }}
-          data-ad-client={client}
-          data-ad-slot={slot}
+          data-ad-client={activeClient}
+          data-ad-slot={activeSlot}
           data-ad-format={variant === "sidebar" ? "vertical" : "auto"}
           data-full-width-responsive={variant !== "sidebar" ? "true" : "false"}
         />

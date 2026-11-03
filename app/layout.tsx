@@ -6,6 +6,8 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { site } from "@/lib/site";
 import "./globals.css";
 
+const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5952797612434262";
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -34,10 +36,9 @@ export const metadata: Metadata = {
   verification: process.env.GOOGLE_SITE_VERIFICATION
     ? { google: process.env.GOOGLE_SITE_VERIFICATION }
     : undefined,
-  // Lets AdSense verify site ownership even though the ad script waits for cookie consent.
-  other: process.env.NEXT_PUBLIC_ADSENSE_CLIENT
-    ? { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT }
-    : undefined,
+  other: {
+    "google-adsense-account": adsenseClient,
+  },
 };
 
 export const viewport: Viewport = {
@@ -48,7 +49,6 @@ export const viewport: Viewport = {
 };
 
 const gaId = process.env.NEXT_PUBLIC_GA_ID;
-const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
