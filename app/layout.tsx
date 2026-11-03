@@ -79,6 +79,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             strategy="afterInteractive"
           />
         )}
+        {MONETIZATION.astraSocialBarUrl && (
+          <Script
+            src={MONETIZATION.astraSocialBarUrl}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );
