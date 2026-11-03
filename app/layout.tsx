@@ -8,7 +8,7 @@ import { MONETIZATION } from "@/lib/monetization";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const adsenseClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5952797612434262";
+const adsenseClient = "ca-pub-5952797612434262";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),

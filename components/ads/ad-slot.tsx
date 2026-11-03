@@ -3,8 +3,8 @@
 import { useEffect, useRef, useState } from "react";
 import { useConsent } from "@/lib/storage/stores";
 
-const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-5952797612434262";
-const defaultSlot = process.env.NEXT_PUBLIC_ADSENSE_SLOT || "1273092714";
+const client = "ca-pub-5952797612434262";
+const defaultSlot = "1273092714";
 
 declare global {
   interface Window {
