@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { usePathname } from "next/navigation";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { AstraBanner } from "@/components/ads/AstraBanner";
 
@@ -11,8 +14,16 @@ interface AdRailsLayoutProps {
  * Three-column desktop layout that flanks WAEC practice tools with
  * Left and Right sticky skyscraper ads (160x600) on xl+ screens (1280px+),
  * and responsive top/bottom leaderboard banners (728x90 desktop, 320x50 mobile).
+ *
+ * NOTE: When the user is in practice/quiz mode (/practice/*), top and bottom
+ * banners are suppressed to keep the screen focused and distraction-free while
+ * answering questions and checking answers. Left & right side skyscraper rails
+ * remain on desktop screens.
  */
 export function AdRailsLayout({ children, showRails = true }: AdRailsLayoutProps) {
+  const pathname = usePathname();
+  const isPracticeMode = pathname?.startsWith("/practice");
+
   if (!showRails) {
     return <>{children}</>;
   }
@@ -30,21 +41,29 @@ export function AdRailsLayout({ children, showRails = true }: AdRailsLayoutProps
 
       {/* Main Content Area */}
       <div className="min-w-0 flex-1 max-w-5xl">
-        {/* Top Responsive Leaderboard Banner */}
-        <div className="my-3 flex justify-center">
-          <AstraBanner size="728x90" className="hidden sm:flex" />
-          <AstraBanner size="320x50" className="flex sm:hidden" />
-        </div>
-        <AdSlot variant="banner" className="mb-4" />
+        {/* Top Responsive Leaderboard Banner - suppressed during active quiz practice */}
+        {!isPracticeMode && (
+          <>
+            <div className="my-3 flex justify-center">
+              <AstraBanner size="728x90" className="hidden sm:flex" />
+              <AstraBanner size="320x50" className="flex sm:hidden" />
+            </div>
+            <AdSlot variant="banner" className="mb-4" />
+          </>
+        )}
 
         {children}
 
-        {/* Bottom Responsive Leaderboard Banner */}
-        <div className="mt-12 mb-6 flex justify-center">
-          <AstraBanner size="728x90" className="hidden sm:flex" />
-          <AstraBanner size="320x50" className="flex sm:hidden" />
-        </div>
-        <AdSlot variant="banner" className="mt-2" />
+        {/* Bottom Responsive Leaderboard Banner - suppressed during active quiz practice */}
+        {!isPracticeMode && (
+          <>
+            <div className="mt-12 mb-6 flex justify-center">
+              <AstraBanner size="728x90" className="hidden sm:flex" />
+              <AstraBanner size="320x50" className="flex sm:hidden" />
+            </div>
+            <AdSlot variant="banner" className="mt-2" />
+          </>
+        )}
       </div>
 
       {/* Right Skyscraper Rail (Desktop 160x600) */}
